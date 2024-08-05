@@ -1,0 +1,57 @@
+(Optional) Assignment: Lambda Expressions
+Due No Due Date Points 0 Submitting a text entry box or a website url
+Create a Java program that reads a file containing lines of text and performs various text processing operations using lambda expressions and functional interfaces. The program should:
+
+Count the number of lines in the file.
+Count the number of words in the file.
+Find the longest word in the file.
+Sort the words in alphabetical order and store the results in a new file.
+Rubric
+Assignment: Lambda Expressions
+Assignment: Lambda Expressions
+Criteria	Ratings	Pts
+This criterion is linked to a Learning OutcomeReadability
+10 pts
+Full Marks
+Code is well-structured, easy to read, and follows Java coding conventions
+5 pts
+Half Marks
+Code is mostly readable but may have minor issues
+0 pts
+No Marks
+Code is difficult to read and does not follow Java coding conventions
+10 pts
+This criterion is linked to a Learning OutcomeCorrectness
+40 pts
+Full Marks
+All required tasks are implemented correctly
+20 pts
+Half Marks
+Most tasks are implemented correctly, but some minor issues exist
+0 pts
+No Marks
+The program does not fulfill the required tasks or has significant issues
+40 pts
+This criterion is linked to a Learning OutcomeLambda Expressions and Functional Interfaces
+40 pts
+Full Marks
+Lambda expressions and functional interfaces are used effectively and efficiently
+20 pts
+Half Marks
+Lambda expressions and functional interfaces are used, but there is room for improvement
+0 pts
+No Marks
+Lambda expressions and functional interfaces are not used or used incorrectly
+40 pts
+This criterion is linked to a Learning OutcomeError Handling
+10 pts
+Full Marks
+The program handles errors gracefully and provides meaningful feedback to the user
+5 pts
+Half Marks
+The program handles most errors, but some edge cases may not be covered
+0 pts
+No Marks
+The program does not handle errors or may crash
+10 pts
+Total Points: 100
