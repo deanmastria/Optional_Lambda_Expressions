@@ -25,12 +25,12 @@ public class TextProcessor {
             System.out.println("Output directory does not exist. Creating...");
             boolean dirCreated = outputDir.mkdirs();
             if (!dirCreated) {
-                System.out.println("Failed to create output directory. Check permissions.");
+                System.err.println("Failed to create output directory. Check permissions.");
                 return;
             }
         } else if (!outputDir.canWrite()) {
             // Check if the program has write permission to the output directory
-            System.out.println("Cannot write to the output directory. Check permissions.");
+            System.err.println("Cannot write to the output directory. Check permissions.");
             return;
         }
 
@@ -39,55 +39,56 @@ public class TextProcessor {
             List<String> lines = Files.readAllLines(Paths.get(inputFilePath));
 
             // Count the number of lines in the file
-            long lineCount = countLines(lines);
+            long lineCount = processText(lines, linesList -> (long) linesList.size());
             System.out.println("Number of lines: " + lineCount);
 
             // Count the number of words in the file
-            long wordCount = countWords(lines);
+            long wordCount = processText(lines, TextProcessor::countWords);
             System.out.println("Number of words: " + wordCount);
 
             // Find the longest word in the file
-            String longestWord = findLongestWord(lines);
+            String longestWord = processText(lines, TextProcessor::findLongestWord);
             System.out.println("Longest word: " + longestWord);
 
             // Sort the words in alphabetical order and store the results in a new file
-            List<String> sortedWords = sortWords(lines);
+            List<String> sortedWords = processText(lines, TextProcessor::sortWords);
             Files.write(Paths.get(outputFilePath), sortedWords);
             System.out.println("Alphabetically sorted words have been written to " + outputFilePath);
 
         } catch (IOException e) {
             // Handle any IOExceptions that occur during file reading/writing
-            e.printStackTrace();
+            System.err.println("An error occurred during file operations: " + e.getMessage());
         }
     }
 
-    // Counts the number of lines in the file
-    public static long countLines(List<String> lines) {
-        return lines.size();
+    // Processes text using a specified text operation
+    public static <R> R processText(List<String> lines, TextOperations<R> operation) {
+        return operation.apply(lines);
     }
 
     // Counts the number of words in the file
     public static long countWords(List<String> lines) {
         return lines.stream()
-                .flatMap(line -> Arrays.stream(line.split("\\s+"))) // Lambda expression to split lines into words using regex
+                .flatMap(line -> Arrays.stream(line.split("\\s+"))) // Split lines into words using regex
                 .count(); // Count the words
     }
 
     // Finds the longest word in the file
     public static String findLongestWord(List<String> lines) {
         return lines.stream()
-                .flatMap(line -> Arrays.stream(line.split("\\s+"))) // Lambda expression to split lines into words using regex
-                .max(Comparator.comparingInt(String::length)) // Lambda expression to find the word with maximum length
+                .flatMap(line -> Arrays.stream(line.split("\\s+"))) // Split lines into words using regex
+                .max(Comparator.comparingInt(String::length)) // Find the word with maximum length
                 .orElse(""); // Return an empty string if no words are found
     }
 
     // Sorts the words in the file in alphabetical order
     public static List<String> sortWords(List<String> lines) {
         return lines.stream()
-                .flatMap(line -> Arrays.stream(line.split("\\s+"))) // Lambda expression to split lines into words using regex
+                .flatMap(line -> Arrays.stream(line.split("\\s+"))) // Split lines into words using regex
                 .sorted() // Sort the words in alphabetical order
                 .collect(Collectors.toList()); // Collect the sorted words into a list
     }
 }
+
 
 
